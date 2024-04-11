@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
 }
 
 // Login
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         // Retrieve form input values
         $username = $_POST['username'];
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
             $response = array("success" => false, "message" => "Database error: Duplicate Usernames");
         }
         elseif ($login === false) {
-            // false return only happens when the query to check username fails
+            // false return only happens when the query to check the username fails
             $response = array("success" => false, "message" => "SQL Query Error");
         }
         else {
@@ -87,9 +87,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
             $response = array("success" => true, "message" => $login);
         }
     }
+    else {
+        // Missing username or password
+        $response = array("success" => false, "message" => "Username or password is missing");
+    }
     // Send response to front end
     echo json_encode($response);
 }
+
+// Search for item
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
+    if (isset($_POST['search_criteria'])) {
+        // Retrieve form input values
+        $search_criteria = $_POST['search_criteria'];
+
+        $search_result = Search($conn, $search_criteria);
+
+        if ($search_result === "No Match"){
+            // No matching search
+            $response = array("success" => false, "message" => "No matching results");
+        }
+        elseif ($search_result === "Bad Result"){
+            // this should not happen and will only happen if there is an error with the query return but not the query itself
+            $response = array("success" => false, "message" => "Bad result return");
+        }
+        elseif ($search_result === false){
+            // false return only happens when the query of the DB fails
+            $response = array("success" => false, "message" => "SQL Query error");
+        }
+        else{
+            // false return only happens when the query to check username fails
+            $response = array("success" => true, "message" => $search_result);
+        }
+    }
+    else {
+        // Missing username or password
+        $response = array("success" => false, "message" => "Username or password is missing");
+    }
+    // Send response to front end
+    echo json_encode($response);
+}
+
 
 // close SQL connection
 $conn->close();

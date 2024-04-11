@@ -22,7 +22,7 @@ function Create_User($connection, $new_username, $new_password, $Fname, $Lname) 
         // if entered username already exists
         return "Username Already Exists";
     }
-    else {// if username does not exist create a userID and create the user in the DB
+    else { // if username does not exist create a userID and create the user in the DB
         
         $uniqid = uniqid();
         $random = mt_rand();
