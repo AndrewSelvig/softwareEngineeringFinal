@@ -61,6 +61,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
     echo json_encode($response);
 }
 
+// Login
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        // Retrieve form input values
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $login = Login($conn, $username, $password);
+
+        if ($login === "Incorrect password" || $login === "Username does not exist") {
+            // username or password incorrect
+            $response = array("success" => false, "message" => "Username or Password incorrect");
+        }
+        elseif ($login === "Duplicate Username"){
+            // username in DB multiple times (this should not happen and is really bad if it does)
+            $response = array("success" => false, "message" => "Database error: Duplicate Usernames");
+        }
+        elseif ($login === false) {
+            // false return only happens when the query to check username fails
+            $response = array("success" => false, "message" => "SQL Query Error");
+        }
+        else {
+            // if the above are all false then $row showld have been returned and can be given to front end
+            $response = array("success" => true, "message" => $login);
+        }
+    }
+    // Send response to front end
+    echo json_encode($response);
+}
+
 // close SQL connection
 $conn->close();
 ?>
+
+Error log formatting:
+[error date/time] error location: error message
+More error message information
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+[error date/time] error location: next error message
