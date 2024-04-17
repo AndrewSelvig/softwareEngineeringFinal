@@ -4,6 +4,8 @@ Sprint one to get done
   - create account and/or log in
   - search products
 
+Setting up the PHP/SQLite: https://drive.google.com/drive/folders/12PvkmNSzev0QNjfVH2HO1PBjzZnROG4y?usp=sharing
+
 Xander R 
   - I started working on a login/create user script let me know if you would like to work on it a bit as well and I can put what I have in here. I also created a main php file that will call the functions
   - Create user needs testing but should otherwise be done
