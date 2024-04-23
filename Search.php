@@ -3,34 +3,34 @@ Function: This PHP file will query a DB to output the product information that w
 
 <?php
 
-function Search($connection, $search_criteria) {
+function Search($SQL_Connection, $Search_Criteria) {
 
-    $sql = "SELECT * FROM product WHERE product_name LIKE '%?%'";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("s", $search_criteria);
-    if (!$stmt->execute()) {
+    $SQL_Query = "SELECT * FROM product WHERE product_name LIKE '%?%'";
+    $Statement = $SQL_Connection->prepare($SQL_Query);
+    $Statement->bind_param("s", $Search_Criteria);
+    if (!$Statement->execute()) {
         // Handle query execution error
-        $error_message = "[" . date("Y-m-d H:i:s") . "] Error executing query in Search function at line " . __LINE__ . ": " . $stmt->error;
-        $separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-        $log_entry = $error_message . PHP_EOL . PHP_EOL . $separator . PHP_EOL;
-        error_log($log_entry, 3, "error.log");
+        $Error_Message = "[" . date("Y-m-d H:i:s") . "] Error executing query in Search function at line " . __LINE__ . ": " . $Statement->error;
+        $Separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+        $Log_Entry = $Error_Message . PHP_EOL . PHP_EOL . $Separator . PHP_EOL;
+        error_log($Log_Entry, 3, "error.log");
         return false;
     }
-    $result = $stmt->get_result();
+    $Result = $Statement->get_result();
 
-    if ($result->num_rows === 0) {
+    if ($Result->num_rows === 0) {
         // if nothing matches search criteria
         return "No Match";
     }
-    elseif ($result->num_rows > 0) {
+    elseif ($Result->num_rows > 0) {
         // if there are results return them
-        return $result;
+        return $Result;
     }
     else {
-        $error_message = "[" . date("Y-m-d H:i:s") . "] Error during results return in Search function at line " . __LINE__ . ": " . $stmt->error;
-        $separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-        $log_entry = $error_message . PHP_EOL . PHP_EOL . $separator . PHP_EOL;
-        error_log($log_entry, 3, "error.log");
+        $Error_Message = "[" . date("Y-m-d H:i:s") . "] Error during results return in Search function at line " . __LINE__ . ": " . $Statement->error;
+        $Separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+        $Log_Entry = $Error_Message . PHP_EOL . PHP_EOL . $Separator . PHP_EOL;
+        error_log($Log_Entry, 3, "error.log");
         return "Bad Result";
     }
 }

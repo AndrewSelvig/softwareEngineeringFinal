@@ -4,40 +4,40 @@ Function: This PHP file creates a function that will query a SQL database to che
 
 <?php
 
-function Create_User($connection, $new_username, $new_password, $Fname, $Lname) {
+function Create_User($SQL_Connection, $New_Username, $New_Password, $FName, $LName) {
 
-    $sql = "SELECT username FROM users WHERE username = ?";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("s", $new_username);
-    if (!$stmt->execute()) {
+    $SQL_Query = "SELECT username FROM users WHERE username = ?";
+    $Statement = $SQL_Connection->prepare($SQL_Query);
+    $Statement->bind_param("s", $New_Username);
+    if (!$Statement->execute()) {
         // Handle query execution error
-        $error_message = "Error executing query in Create_User function at line " . __LINE__ . ": " . $stmt->error;
-        $separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-        error_log(date("[Y-m-d H:i:s]") . " " . $error_message . PHP_EOL . PHP_EOL . $separator . PHP_EOL, 3, "error.log");
+        $Error_Message = "Error executing query in Create_User function at line " . __LINE__ . ": " . $Statement->error;
+        $Separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+        error_log(date("[Y-m-d H:i:s]") . " " . $Error_Message . PHP_EOL . PHP_EOL . $Separator . PHP_EOL, 3, "error.log");
         return false;
     }
-    $result = $stmt->get_result();
+    $Result = $Statement->get_result();
 
-    if ($result->num_rows > 0) {
+    if ($Result->num_rows > 0) {
         // if entered username already exists
         return "Username Already Exists";
     }
     else { // if username does not exist create a userID and create the user in the DB
         
-        $uniqid = uniqid();
-        $random = mt_rand();
-        $userID = $uniqid . $random;
+        $UniqID = abs(crc32(uniqid()));
+        $Random = mt_rand();
+        $UserID = $UniqID . $Random;
 
         // hash the password
-        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users VALUES (?, ?, ?, ?, ?)";
-        $stmt = $connection->prepare($sql);
-        $stmt->bind_param("sssss", $userID, $new_username, $hashed_password, $Fname, $Lname);
-        if (!$stmt->execute()) {
+        $Hashed_Password = password_hash($New_Password, PASSWORD_DEFAULT);
+        $SQL_Query = "INSERT INTO users VALUES (?, ?, ?, ?, ?)";
+        $Statement = $SQL_Connection->prepare($SQL_Query);
+        $Statement->bind_param("sssss", $UserID, $New_Username, $Hashed_Password, $FName, $LName);
+        if (!$Statement->execute()) {
             // Handle insertion error
-            $error_message = "Error inserting user in Create_User function at line " . __LINE__ . ": " . $stmt->error;
-            $separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-            error_log(date("[Y-m-d H:i:s]") . " " . $error_message . PHP_EOL . PHP_EOL . $separator . PHP_EOL, 3, "error.log");
+            $Error_Message = "Error inserting user in Create_User function at line " . __LINE__ . ": " . $Statement->error;
+            $Separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+            error_log(date("[Y-m-d H:i:s]") . " " . $Error_Message . PHP_EOL . PHP_EOL . $Separator . PHP_EOL, 3, "error.log");
             return false;
         }
         // User successfully created
