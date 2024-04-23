@@ -24,3 +24,4 @@ Xander R
   - Main.php will be continually edited to add the new functions. Currently has the create_user, item_search and login functions implemented 4/11/24
   - 4/22/24
   - Working on the Edit_User and add_to_cart functions
+  - started working on a better error logging system to try an clean up the code
