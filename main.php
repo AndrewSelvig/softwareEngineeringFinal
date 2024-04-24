@@ -26,6 +26,10 @@ if ($SQL_Connection->connect_error) {
 
 // statements to call query functions
 
+//////////////////
+//  User Stuff  //
+//////////////////
+
 ///////////////////
 //  create user  //
 ///////////////////
@@ -87,41 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
         else {
             // if the above are all false then the login was successful and $row has been returned and can be given to front end
             $Response = array("success" => true, "message" => $Login);
-        }
-    }
-    else {
-        // Missing username or password
-        $Response = array("success" => false, "message" => "Username or password is missing");
-    }
-    // Send response to front end
-    echo json_encode($Response);
-}
-
-///////////////////
-//  Item Search  //
-///////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search_criteria'])) {
-    if (isset($_POST['search_criteria'])) {
-        // Retrieve form input values
-        $Search_Criteria = $_POST['search_criteria'];
-
-        $Search_Result = Search($SQL_Connection, $Search_Criteria);
-
-        if ($Search_Result === "No Match"){
-            // No matching search
-            $Response = array("success" => false, "message" => "No matching results");
-        }
-        elseif ($Search_Result === "Bad Result"){
-            // this should not happen and will only happen if there is an error with the query return but not the query itself
-            $Response = array("success" => false, "message" => "Bad result return");
-        }
-        elseif ($Search_Result === false){
-            // false return only happens when the query of the DB fails
-            $Response = array("success" => false, "message" => "SQL Query error");
-        }
-        else{
-            // false return only happens when the query to check username fails
-            $Response = array("success" => true, "message" => $Search_Result);
         }
     }
     else {
@@ -202,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart']) && $_PO
         
         $Product_ID = $_POST['product_id'];
         $Quantity = $_POST['quantity'];
-        $User_ID = $_POST['user_id'];
+        $User_ID = $_POST['user_id'] ?? null;
 
         $Cart_Response = Add_to_Cart($SQL_Connection, $Product_ID, $Quantity, $User_ID);
 
@@ -227,6 +196,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart']) && $_PO
     }
     else {
         $Response = array("success" => false, "message" => "No Product ID Given");
+    }
+    // Send response to front end
+    echo json_encode($Response);
+}
+
+/////////////////////
+//  Retrieve Cart  //
+/////////////////////
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['display_cart']) && $_POST['display_cart'] == true) {
+    if (isset($_POST['user_id']) && $_POST['user_id'] !== null) {
+
+        $User_ID = $_POST['user_id'];
+
+        $Cart_Contents = Retrieve_Cart($SQL_Connection, $User_ID);
+
+        if ($Cart_Contents === false) {
+            $Response = array("success" => false, "message" => "SQL query error");
+        }
+        elseif ($Cart_Contents === "Nothing") {
+            $Response = array("success" => true, "message" => "Nothing in Cart");
+        }
+        else {
+            $Response = array("success" => false, "message" => $Cart_Contents);
+        }
+
+    }
+    // Send response to front end
+    echo json_encode($Response);
+}
+
+/////////////
+//  Other  //
+/////////////
+
+///////////////////
+//  Item Search  //
+///////////////////
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
+
+        $Search_Criteria = $_POST['search_criteria'] ?? ''; // if no search criteria is given it will use '' (should return everything)
+
+        $Search_Result = Search($SQL_Connection, $Search_Criteria);
+
+        if ($Search_Result === "No Match"){
+            // No matching search
+            $Response = array("success" => false, "message" => "No matching results");
+        }
+        elseif ($Search_Result === "Bad Result"){
+            // this should not happen and will only happen if there is an error with the query return but not the query itself
+            $Response = array("success" => false, "message" => "Bad result return");
+        }
+        elseif ($Search_Result === false){
+            // false return only happens when the query of the DB fails
+            $Response = array("success" => false, "message" => "SQL Query error");
+        }
+        else{
+            // false return only happens when the query to check username fails
+            $Response = array("success" => true, "message" => $Search_Result);
+        }
+    // Send response to front end
+    echo json_encode($Response);
+}
+
+////////////////////////
+//  Process Purchase  //
+////////////////////////
+
+$Purchase = true; // placeholder for if purchase is approved
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['process_purchase'] === true) {
+    if (isset($_POST['card_number']) && isset($_POST['card_cvv'])){ // rest of necissary payment info
+
+        $Product_IDs = $_POST['products']; // These both need to be arrays and have corrosponding keys
+        $Quantities = $_POST['quantities']; // ex. quantities[0] is for products[0] and quantities[10] is for products[10] etc.
+
+        if (count($Product_IDs) === count($Quantities)){
+            
+            if ($Purchase === true) {
+                $Inventory = Update_Inventory($SQL_Connection, $Product_IDs, $Quantities);
+            }
+        }
+    }
+    else{
+        $Response = array("success" => false, "message" => "Username or password is missing");
     }
 }
 

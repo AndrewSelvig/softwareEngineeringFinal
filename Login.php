@@ -8,6 +8,7 @@ Function: This PHP file creates a function that queries a database for an existi
 function Login($SQL_Connection, $Username, $Password) {
 
     $SQL_Query = "SELECT * FROM users WHERE username = ?";
+    
     $Statement = $SQL_Connection->prepare($SQL_Query);
     $Statement->bind_param("s", $Username);
     if (!$Statement->execute()) {

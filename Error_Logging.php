@@ -19,5 +19,4 @@ function Log_Error($type, $Error, $line, $file) {
         error_log($Log_Entry, 3, "error.log");
     }
 }
-
 ?>

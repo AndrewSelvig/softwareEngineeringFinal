@@ -6,6 +6,7 @@ Function: This PHP file will query a DB to output the product information that w
 function Search($SQL_Connection, $Search_Criteria) {
 
     $SQL_Query = "SELECT * FROM product WHERE product_name LIKE '%?%'";
+    
     $Statement = $SQL_Connection->prepare($SQL_Query);
     $Statement->bind_param("s", $Search_Criteria);
     if (!$Statement->execute()) {

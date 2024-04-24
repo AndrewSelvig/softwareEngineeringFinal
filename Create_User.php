@@ -7,6 +7,7 @@ Function: This PHP file creates a function that will query a SQL database to che
 function Create_User($SQL_Connection, $New_Username, $New_Password, $FName, $LName) {
 
     $SQL_Query = "SELECT username FROM users WHERE username = ?";
+    
     $Statement = $SQL_Connection->prepare($SQL_Query);
     $Statement->bind_param("s", $New_Username);
     if (!$Statement->execute()) {

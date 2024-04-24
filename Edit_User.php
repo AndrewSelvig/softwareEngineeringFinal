@@ -38,6 +38,7 @@ function Edit_User($SQL_Connection, $Username, $Password, $Email, $FName, $LName
     }
 
     $SQL_Query = "SELECT * FROM users WHERE username = ?";
+    
     $Statement = $SQL_Connection->prepare($SQL_Query);
     $Statement->bind_param("s", $Username);
     if (!$Statement->execute()) {
