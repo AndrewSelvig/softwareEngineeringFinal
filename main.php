@@ -9,6 +9,7 @@ require_once 'Login.php';
 require_once 'Search.php';
 require_once 'Edit_User.php';
 require_once 'Add_to_Cart.php';
+require_once 'Update_Inventory.php';
 
 
 // SQL database connection information
