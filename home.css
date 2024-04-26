@@ -1,0 +1,118 @@
+/* General Body and Layout Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light grey background for a clean look */
+}
+
+header {
+    background-color: #333; /* Dark header for contrast */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px; /* Logo size */
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    width: 300px; /* Fixed width for search bar */
+    margin-right: 10px;
+    border: 2px solid #ccc; /* Subtle border for the input */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.account-actions a, .account-actions button {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Green for actionable items */
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.account-actions img {
+    height: 40px;
+}
+
+/* Styling for the main content area */
+.content {
+    padding: 20px;
+}
+
+.category-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.category-buttons img {
+    height: 40px; /* Icons for categories */
+}
+
+/* Deals section */
+.today-deals h2 {
+    text-align: center;
+    padding: 10px;
+    background-color: #ddd; /* Light grey background for the section header */
+    color: #333; /* Dark text for contrast */
+}
+
+.deals-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Center deals and handle overflow gracefully */
+}
+
+.deal {
+    width: 19%; /* Adjusted to fit 5 per row */
+    margin: 0.5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 10px;
+    background-color: white; /* White background for deal items */
+}
+
+.deal img {
+    width: 100%; /* Responsive image width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.deal p {
+    color: #666; /* Dark grey text color */
+    font-size: 14px; /* Readable text size */
+    padding-top: 5px; /* Space between image and text */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Ensure it's at the bottom but not fixed */
+    width: 100%;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .search-bar input[type="text"] {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 10px; /* Space below the search bar */
+    }
+
+    .deals-container, .category-buttons {
+        justify-content: center;
+    }
+
+    .deal {
+        width: 48%; /* Adjust for smaller screens, 2 per row */
+    }
+}

@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* Base styling */
+html, body {
+    width: 100%;               /* Ensure body takes up full viewport width */
+    overflow-x: hidden;        /* Hide horizontal overflow */
+    margin: 0;                 /* Remove default margins */
+    padding: 0;                /* Remove default padding */
+    box-sizing: border-box;    /* Include padding and border in the element's total width and height */
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing from the body */
+}
+
+/* Continue with other styles */
+
+
+
+/* Header section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    width: 300px; /* Adjusted to fixed width for consistency */
+    margin-right: 10px;
+}
+
+.account-actions a, .account-actions button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Uniform color for all buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; /* Ensures links do not have underlines */
+    display: inline-flex; /* Aligns content vertically */
+    align-items: center;
+    border-radius: 5px; /* Adds rounded corners */
+    margin-right: 10px;
+}
+
+.account-actions img {
+    height: 40px;
+}
+
+/* Main content */
+.container, .para {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+details {
+    background: white;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+summary:hover {
+    color: #0056b3; /* Enhances interactivity */
+}
+
+details[open] {
+    background-color: #e9ecef;
+}
+
+em {
+    color: #666;
+    font-size: 0.9em;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Changed from 'fixed' to 'relative' for natural flow */
+    width: 100%;
+}

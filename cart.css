@@ -1,0 +1,114 @@
+/* General Body and Layout Styles */
+html, body {
+    width: 100%;               /* Ensure body takes up full viewport width */
+    overflow-x: hidden;        /* Hide horizontal overflow */
+    margin: 0;                 /* Remove default margins */
+    padding: 0;                /* Remove default padding */
+    box-sizing: border-box;    /* Include padding and border in the element's total width and height */
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing from the body */
+}
+
+/* Continue with other styles */
+
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Ensure body takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    width: 300px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.account-actions a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.account-actions img {
+    height: 40px;
+}
+
+main {
+    flex-grow: 1; /* Allows the main content to expand and push the footer down */
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.remove-btn {
+    background-color: #f44336; /* Red for remove */
+}
+
+.update-btn {
+    background-color: #2ecc71; /* Green for update */
+}
+
+.checkout-btn {
+    background-color: #3498db; /* Blue for checkout */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Makes footer part of the flow */
+    width: 100%;
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
