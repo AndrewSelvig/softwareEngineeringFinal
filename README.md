@@ -25,3 +25,6 @@ Xander R
   - 4/22/24
   - Working on the Edit_User and add_to_cart functions
   - started working on a better error logging system to try an clean up the code
+  - 4/27/24
+  - Created an admin check and delete user function
+  - created a logging for admin requests incase of an issue
