@@ -9,7 +9,8 @@ require_once 'Login.php';
 require_once 'Search.php';
 require_once 'Edit_User.php';
 require_once 'Add_to_Cart.php';
-require_once 'Update_Inventory.php';
+require_once 'Delete_User.php';
+require_once 'Check_Admin.php';
 
 
 // SQL database connection information
@@ -160,6 +161,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile'])) {
     }
 }
 
+///////////////////
+//  Delete User  //
+///////////////////
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['userid'])) {
+    $Loggedin_User_ID = $_POST['userid'];
+    if (Check_Admin($SQL_Connection, $Loggedin_User_ID) === true){
+
+        $Username = $_POST['username'];
+        $Password = $_POST['password'];
+
+        $Login = Login($SQL_Connection, $Username, $Password);
+
+        if ($Login === "Incorrect password" || $Login === "Username does not exist") {
+            // username or password incorrect
+            $Response = array("success" => false, "message" => "Username or Password incorrect");
+        }
+        elseif ($Login === "Duplicate Username"){
+            // username in DB multiple times (this should not happen and is really bad if it does)
+            $Response = array("success" => false, "message" => "Database error: Duplicate Usernames THIS IS A REALLY BAD ERROR");
+        }
+        elseif ($Login === false) {
+            // false return only happens when the query to check the username fails
+            $Response = array("success" => false, "message" => "SQL Query Error");
+        }
+        else {
+            $Delete_User_ID = $_POST['delete_userid'] ?? null;
+            // if the above are all false then the login was successful and $row has been returned
+            $Delete_User = Delete_User($SQL_Connection, $Delete_User_ID);
+
+            if ($Delete_User === "No User_ID given"){
+                $Response = array("success" => false, "message" => "No UserID given");
+            }
+            elseif ($Delete_User === false){
+                $Response = array("success" => false, "message" => "SQL Query or Unknown Error");
+            }
+            elseif ($Delete_User === "User does not exist") {
+                $Response = array("success" => false, "message" => "No User with UserID found");
+            }
+            elseif ($Delete_User === "Duplicate UserIDs") {
+                $Response = array("success" => false, "message" => "Duplicate UserIDs in system.. THIS IS BAD");
+            }
+            elseif ($Delete_User === true) {
+                $Response = array("success" => true, "message" => "User Deleted");
+            }
+            else{
+                $Response = array("success" => false, "message" => "unexpected response");
+            }
+        }
+        // Log Admin Events
+        $Separator = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+        error_log(date("[Y-m-d H:i:s]") . "Deleted User Request" . PHP_EOL, 3, "admin.log");
+        error_log("User: " . $Username . PHP_EOL, 3, "admin.log");
+        error_log("User_ID: " . $User_ID . PHP_EOL, 3, "admin.log");
+        error_log("Deleted_ID: " . $Delete_User_ID . PHP_EOL, 3, "admin.log");
+        error_log("Response: " . json_encode($Response) . PHP_EOL . PHP_EOL . $Separator . PHP_EOL, 3, "admin.log");
+    }
+    // Send response to front end
+    echo json_encode($Response);
+}
+
+
 //////////////////
 //  Cart Stuff  //
 //////////////////
@@ -294,3 +356,9 @@ More error message information
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 [error date/time] error location: next error message
+
+
+
+FE-7: Delete customer account (by an administrator)
+FE-8: Run sales report and export report as a Comma Delimited File for Excel or a formatted CSV file (administrator)
+FE-9: Update cash received in a web server after a purchase.
