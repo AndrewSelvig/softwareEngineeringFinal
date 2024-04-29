@@ -14,10 +14,10 @@ require_once 'Check_Admin.php';
 
 
 // SQL database connection information
-$Server_Name = "localhost";
-$DB_Username = "username";
-$DB_Password = "password";
-$DB_Name = "myDB";
+$Server_Name = "sql3.freemysqlhosting.net";
+$DB_Username = "sql3702657";
+$DB_Password = "Cv6MvrfDSh";
+$DB_Name = "sql3702657";
 
 // Create connection
 $SQL_Connection = new mysqli($Server_Name, $DB_Username, $DB_Password, $DB_Name);
