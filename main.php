@@ -35,7 +35,7 @@ if ($SQL_Connection->connect_error) {
 ///////////////////
 //  create user  //
 ///////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['create_user'] === true) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         // Retrieve form input values
         $Username = $_POST['username'];
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
 /////////////
 //  Login  //
 /////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['Login'] === true) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         // Retrieve form input values
         $Username = $_POST['username'];
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
 ////////////////////
 //  Edit Profile  //
 ////////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['profile'] === true) {
     if (isset($_POST['edit'])) { // require login to change information
         if (isset($_POST['username']) && isset($_POST['password'])) {
             
