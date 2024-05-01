@@ -5,16 +5,14 @@ html, body {
     margin: 0;                 /* Remove default margins */
     padding: 0;                /* Remove default padding */
     box-sizing: border-box;    /* Include padding and border in the element's total width and height */
+    font-family: Arial, sans-serif; /* Set Arial as the default font for the page */
 }
 
 *, *::before, *::after {
-    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing from the body */
+    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing */
 }
 
-/* Continue with other styles */
-
-
-
+/* Header Styles */
 header {
     background-color: #333;
     color: white;
@@ -32,7 +30,7 @@ header {
     padding: 8px;
     margin-left: 20px;
     width: 300px;
-    border: 2px solid #ccc;
+    border: 2px solid black;
     border-radius: 4px;
 }
 
@@ -47,28 +45,27 @@ header {
     border-radius: 5px;
 }
 
-.account-actions img {
-    height: 40px;
-}
-
+/* Login Container & Form Styles */
 .signup-container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin-top: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group:active {
+    border-color: #4CAF50;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
 }
-
 
 .login-link {
     margin-top: 20px;
@@ -84,11 +81,10 @@ label {
     text-decoration: underline;
 }
 
-
-input[type="email"], input[type="password"] {
+input[type="username"], input[type="password"] {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
 }
 
@@ -97,21 +93,26 @@ button {
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
+    display: block;            /* Ensure button is centered */
+    margin: auto;              /* Center button horizontally */
 }
 
+/* Footer Styles */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 20px;
-    position: relative;
+    position: fixed;           /* Stick footer to the bottom */
+    left: 0;
     bottom: 0;
     width: 100%;
 }
 
+/* Responsive Styles for Smaller Screens */
 @media (max-width: 768px) {
     .search-bar input[type="text"] {
         width: 90%;

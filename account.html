@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
-  <link rel="stylesheet" href="cart.css">
-  <script src="cart.js" defer></script>
+  <title>Account</title>
+  <link rel="stylesheet" href="account.css">
 </head>
 <body>
 <header>
@@ -25,28 +24,27 @@
 </header>
 
 <main>
-  <h1>Shopping Cart</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>LED Monitor</td>
-      <td><input type="number" value="1" min="1"></td>
-      <td>$150.00</td>
-      <td><button class="remove-btn">Remove</button></td>
-    </tr>
-    <!-- More items can be added similarly -->
-    </tbody>
-  </table>
-  <div class="actions">
-    <button class="checkout-btn">Proceed to Checkout</button>
+  <div class="user-settings">
+    <h1>User Settings</h1>
+    <form action="/submit-username-change" method="POST">
+      <div class="form-group">
+        <label for="username">Change Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <button type="submit">Update Username</button>
+    </form>
+
+    <form action="/submit-password-change" method="POST">
+      <div class="form-group">
+        <label for="password">Change Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Update Password</button>
+    </form>
+
+    <div class="logout-section">
+      <a href="/logout" class="logout-button">Log Out</a>
+    </div>
   </div>
 </main>
 
