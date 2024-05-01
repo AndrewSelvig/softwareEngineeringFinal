@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup</title>
+  <title>Sign-up</title>
   <link rel="stylesheet" href="signup.css">
-  <script src="signup.js" defer></script>
 </head>
 <body>
 <header>
   <div class="logo">
     <a href="home.html">
-      <img src="logo-placeholder.png" alt="Store Logo">
+      <img src="https://github.com/AndrewSelvig/softwareEngineeringFinal/blob/main/logo.png?raw=true" alt="Store Logo">
     </a>
   </div>
   <div class="search-bar">
@@ -20,16 +19,16 @@
   <div class="account-actions">
     <a href="login.html" class="signin-button">Sign In / Create Account</a>
     <a href="help.html" class="help-button">Help</a>
-    <a href="cart.html"><img src="cart-placeholder.png" alt="Cart"></a>
+    <a href="cart.html" class="Cart" > Cart </a>
   </div>
 </header>
 
 <div class="signup-container">
   <h2>Create Account</h2>
-  <form action="/submit-your-signup-form-handler" method="POST" id="signupForm">
+  <form action="/submit-your-signup-form-handler" method="POST" >
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <label for="Username">Username:</label>
+      <input type="Username" id="Username" name="Username" required>
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
@@ -40,13 +39,13 @@
       <input type="password" id="confirm-password" name="confirm-password" required>
     </div>
     <button type="submit">Sign Up</button>
-    <p id="message"></p>
+    <p class="login-link">Already have an account? <a href="login.html">Log in here</a>.</p>
+
   </form>
-  <p class="login-link">Already have an account? <a href="login.html">Log in here</a>.</p>
 </div>
 
 <footer>
-  <p>© 2024 Electronics Store. All rights reserved.</p>
+  <p>© 2024 TinkerBuy. All rights reserved.</p>
   <p>Privacy Policy | Terms of Use | Contact Us</p>
 </footer>
 

@@ -14,10 +14,10 @@ require_once 'Check_Admin.php';
 
 
 // SQL database connection information
-$Server_Name = "sql3.freemysqlhosting.net";
-$DB_Username = "sql3702657";
-$DB_Password = "Cv6MvrfDSh";
-$DB_Name = "sql3702657";
+$Server_Name = "localhost";
+$DB_Username = "username";
+$DB_Password = "password";
+$DB_Name = "myDB";
 
 // Create connection
 $SQL_Connection = new mysqli($Server_Name, $DB_Username, $DB_Password, $DB_Name);
@@ -35,7 +35,7 @@ if ($SQL_Connection->connect_error) {
 ///////////////////
 //  create user  //
 ///////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['create_user'] === true) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         // Retrieve form input values
         $Username = $_POST['username'];
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_user'])) {
 /////////////
 //  Login  //
 /////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['Login'] === true) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         // Retrieve form input values
         $Username = $_POST['username'];
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
 ////////////////////
 //  Edit Profile  //
 ////////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['profile'] === true) {
     if (isset($_POST['edit'])) { // require login to change information
         if (isset($_POST['username']) && isset($_POST['password'])) {
             
@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile'])) {
 ///////////////////
 //  Delete User  //
 ///////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['userid'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['userid']) && $_POST['delete_user'] === true) {
     $Loggedin_User_ID = $_POST['userid'];
     if (Check_Admin($SQL_Connection, $Loggedin_User_ID) === true){
 
@@ -229,7 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['userid'])) {
 ///////////////////
 //  Add to Cart  //
 ///////////////////
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart']) && $_POST['add_to_cart'] == true) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart']) && $_POST['add_to_cart'] === true) {
     if (isset($_POST['product_id']) && $_POST['product_id'] > 0 && isset($_POST['quantity']) && $_POST['quantity'] > 0) {
         
         $Product_ID = $_POST['product_id'];
@@ -333,16 +333,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['process_purchase'] === true)
 
         $Product_IDs = $_POST['products']; // These both need to be arrays and have corrosponding keys
         $Quantities = $_POST['quantities']; // ex. quantities[0] is for products[0] and quantities[10] is for products[10] etc.
+        $User_ID = $_POST['userid'];
 
-        if (count($Product_IDs) === count($Quantities)){
+        if (count($Product_IDs) === count($Quantities)) {
             
             if ($Purchase === true) {
+                $Sale = Complete_Sale($SQL_Connection, $User_ID);
                 $Inventory = Update_Inventory($SQL_Connection, $Product_IDs, $Quantities);
             }
         }
     }
     else{
         $Response = array("success" => false, "message" => "Username or password is missing");
+    }
+}
+
+////////////////////
+//  Sales Report  //
+////////////////////
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['sales_report'] === true){
+    $Sales_Report = Sales_Report($SQL_Connection);
+
+    if ($Sales_Report === false) {
+        $Response = array("success" => false, "message" => "SQL statement failure");
+    }
+    else {
+        $Response = array("success" => false, "message" => $Sales_Report);
     }
 }
 

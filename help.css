@@ -1,29 +1,25 @@
-@charset "utf-8";
-/* Base styling */
+/* General Body and Layout Styles */
 html, body {
     width: 100%;               /* Ensure body takes up full viewport width */
     overflow-x: hidden;        /* Hide horizontal overflow */
     margin: 0;                 /* Remove default margins */
     padding: 0;                /* Remove default padding */
     box-sizing: border-box;    /* Include padding and border in the element's total width and height */
+    font-family: Arial, sans-serif; /* Set Arial as the default font for the page */
 }
 
 *, *::before, *::after {
-    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing from the body */
+    box-sizing: inherit;       /* Ensure all elements inherit the box-sizing */
 }
 
-/* Continue with other styles */
-
-
-
-/* Header section */
+/* Header Styles */
 header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
 }
 
 .logo img {
@@ -32,71 +28,84 @@ header {
 
 .search-bar input[type="text"] {
     padding: 8px;
-    width: 300px; /* Adjusted to fixed width for consistency */
-    margin-right: 10px;
+    margin-left: 20px;
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 4px;
 }
 
-.account-actions a, .account-actions button {
-    padding: 10px 20px;
-    background-color: #4CAF50; /* Uniform color for all buttons */
+.account-actions a {
     color: white;
-    border: none;
-    cursor: pointer;
-    text-decoration: none; /* Ensures links do not have underlines */
-    display: inline-flex; /* Aligns content vertically */
-    align-items: center;
-    border-radius: 5px; /* Adds rounded corners */
+    text-decoration: none;
     margin-right: 10px;
-}
-
-.account-actions img {
-    height: 40px;
-}
-
-/* Main content */
-.container, .para {
-    padding: 20px;
-    background-color: #f4f4f4;
-}
-
-h1, h2, h3 {
-    color: #333;
-}
-
-details {
-    background: white;
-    padding: 10px;
-    margin-top: 5px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #4CAF50;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: black;
+    text-decoration: none;
+    font-size: 55px;
+    letter-spacing: 2px;
+}
+
+.container h2 {
+    color: black;
+    text-decoration: none;
+    font-size: 35px;
+    font-weight: 500;
+    padding-left: 60px;
+    letter-spacing: 1px;
+}
+
+
+details{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+    color: #4CAF50;
 }
 
 summary {
-    font-weight: bold;
-    cursor: pointer;
+    color: black;
+    background-color: #d7d7d7;
+    padding: .5em 1.3rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    transition: height 1s ease;
 }
 
-summary:hover {
-    color: #0056b3; /* Enhances interactivity */
+summary::-webkit-details-marker {
+    display: none;
 }
 
-details[open] {
-    background-color: #e9ecef;
+summary:after{
+    content: "\002B";
 }
 
-em {
-    color: #666;
-    font-size: 0.9em;
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
 }
 
-a {
-    color: #0066cc;
-    text-decoration: none;
+details[open] summary:after{
+    content: "\00D7";
 }
 
-a:hover {
-    text-decoration: underline;
+details[open] div{
+    padding: .5em 1em;
+    padding-left: 50px;
+    font-size: 18px;
 }
+
 
 /* Footer */
 footer {
@@ -104,6 +113,13 @@ footer {
     color: white;
     text-align: center;
     padding: 20px;
-    position: relative; /* Changed from 'fixed' to 'relative' for natural flow */
     width: 100%;
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .search-bar input[type="text"] {
+        width: 90%;
+        margin: 10px auto;
+    }
 }

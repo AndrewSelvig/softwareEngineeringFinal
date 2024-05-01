@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Electronics Store</title>
+  <title>Checkout</title>
   <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
 <header>
   <div class="logo">
-    <img src="logo-placeholder.png" alt="Store Logo">
+    <a href="home.html">
+      <img src="https://github.com/AndrewSelvig/softwareEngineeringFinal/blob/main/logo.png?raw=true" alt="Store Logo">
+    </a>
   </div>
   <div class="search-bar">
     <input type="text" placeholder="Search for products">
   </div>
   <div class="account-actions">
-    <button>Sign In / Create Account</button>
-    <button>Help</button> <!-- Help button added here -->
-    <img src="account-placeholder.png" alt="Account">
-    <img src="cart-placeholder.png" alt="Cart">
+    <a href="login.html" class="signin-button">Sign In / Create Account</a>
+    <a href="help.html" class="help-button">Help</a>
+    <a href="cart.html" class="Cart" > Cart </a>
   </div>
 </header>
+
+<h1>Checkout</h1>
 
 <div class="row">
   <div class="col-75">
@@ -52,9 +55,9 @@
         <div class="col-50">
           <h3>Payment</h3>
           <label for="fname">Accepted Payment Methods</label>
-          <img class="icon-container" src="C:\Users\selma\Downloads\Project images\payment.png" alt=" ">
+          <img class="icon-container" src="https://github.com/AndrewSelvig/softwareEngineeringFinal/blob/main/payment.png?raw=true" alt=" ">
           <label for="cname">Name on Card</label>
-          <input type="text" id="cname" name="cardname" placeholder="Selman Muhedin Yassin">
+          <input type="text" id="cname" name="cardname" placeholder="Selman Yassin">
           <label for="ccnum">Credit card number</label>
           <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
           <label for="expmonth">Exp Month</label>
@@ -67,7 +70,7 @@
             </div>
             <div class="col-50">
               <label for="cvv">CVV</label>
-              <input type="text" id="cvv" name="cvv" placeholder="789">
+              <input type="text" id="cvv" name="cvv" placeholder="123">
             </div>
           </div>
         </div>
@@ -92,16 +95,14 @@
       <p><a>Shipping</a><span class="price">0.00</span></p>
       <p><a>Tax</a> <span class="price">$24.89</span></p>
       <hr>
-      <p>Total <span class="price" style="color:crimson"><b>$204.89</b></span></p>
+      <p>Total <span class="price" style="color:#4CAF50"><b>$204.89</b></span></p>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>Mock adaptation of Nike's <a href="https://www.nike.com/launch/t/air-jordan-1-chicago1">SNKRS</a> website.</p>
-  <p>For any concerns send an <a href="mailto: selmanyassin02@gmail.com">email</a> to our customer service.</p>
-  <a href="help.html">Customer Service</a>
-  <p>©2022 Nike Inc. All Rights Reserved</p>
+  <p>© 2024 TinkerBuy. All rights reserved.</p>
+  <p>Privacy Policy | Terms of Use | Contact Us</p>
 </footer>
 
 </body>

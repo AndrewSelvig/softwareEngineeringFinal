@@ -6,6 +6,7 @@ html, body {
     padding: 0;                /* Remove default padding */
     box-sizing: border-box;    /* Include padding and border in the element's total width and height */
     font-family: Arial, sans-serif; /* Set Arial as the default font for the page */
+         /* Ensure body takes at least the height of the viewport */
 }
 
 *, *::before, *::after {
@@ -29,7 +30,7 @@ header {
 .search-bar input[type="text"] {
     padding: 8px;
     margin-left: 20px;
-    width: 300px;
+    width: 300px;              /* Consider increasing width for larger screens */
     border: 2px solid black;
     border-radius: 4px;
 }
@@ -45,63 +46,82 @@ header {
     border-radius: 5px;
 }
 
-main {
-    flex-grow: 1; /* Allows the main content to expand and push the footer down */
-    padding: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
+.user-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-top: 20px;
 }
 
-th, td {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+.form-group {
+    margin-bottom: 30px;
 }
 
-input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    margin: 5px;
+.form-group:active {
+    border-color: #4CAF50;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.logout-section {
+    text-align: center;
+    margin-top: 20px;
 }
 
 button {
-    padding: 10px 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 16px;
+    display: block; /* Ensure button is centered */
+    margin: auto; /* Center button horizontally */
+    text-decoration: none;
 }
 
-.remove-btn {
+.logout-button {
+    padding: 10px 20px;
+    background-color: crimson;
     color: white;
-    background-color: crimson; /* Red for remove */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;            /* Ensure button is centered */
+    margin: auto;              /* Center button horizontally */
+    text-decoration: none;    /* Remove underline from logout button */
 }
 
-
-.checkout-btn {
-    color: white;
-    background-color: #4CAF50; /* Blue for checkout */
+button:hover {
+    background-color: darkgreen; /* Darker shade for hover effect */
 }
 
+.logout-button:hover {
+    background-color: darkred; /* Darker shade for hover effect */
+}
+
+/* Footer Styles */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 20px;
-    position: fixed;           /* Stick footer to the bottom */
-    left: 0;
-    bottom: 0;
     width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0; /* Stick footer to the bottom */
 }
 
 /* Responsive Styles for Smaller Screens */
 @media (max-width: 768px) {
-    .search-bar input[type="text"] {
-        width: 90%;
+    .search-bar input[type="text"], .user-settings {
+        width: 90%;  /* Adjust width for smaller screens */
         margin: 10px auto;
     }
 }
