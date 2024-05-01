@@ -83,9 +83,17 @@ button {
 
 
 .checkout-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
     color: white;
-    background-color: #4CAF50; /* Blue for checkout */
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 
 footer {
     background-color: #333;
